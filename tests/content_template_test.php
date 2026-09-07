@@ -40,7 +40,7 @@ final class content_template_test extends \advanced_testcase {
         $this->assertStringContainsString('aria-pressed="false"', $html);
         $this->assertStringContainsString('data-role="fullscreen-label"', $html);
         $this->assertStringContainsString('data-fullscreen-label="Interactive test"', $html);
-        $this->assertStringContainsString('fa-expand', $html);
+        $this->assertStringContainsString('data-action="fullscreen"', $html);
         $this->assertStringNotContainsString('/i/fullscreen', $html);
         $this->assertMatchesRegularExpression('/id="interactembed-test-frame"[^>]*hidden/', $html);
     }

@@ -23,6 +23,68 @@
 
 import {get_string as getString} from 'core/str';
 
+const progressKeys = ['type', 'version', 'nonce', 'status', 'score', 'scoremax'];
+
+/**
+ * Validates the progress message envelope and nonce.
+ *
+ * @param {*} message message received from the embedded content
+ * @param {Object} tracking progress endpoint configuration
+ * @returns {boolean}
+ */
+const isProgressMessage = (message, tracking) => {
+    if (!message || typeof message !== 'object' || Array.isArray(message)) {
+        return false;
+    }
+    return !Object.keys(message).some(key => !progressKeys.includes(key)) &&
+        message.type === 'interactembed:progress' &&
+        message.version === 1 &&
+        typeof message.nonce === 'string' &&
+        message.nonce === tracking.messagenonce &&
+        typeof message.status === 'string' &&
+        ['inprogress', 'completed'].includes(message.status);
+};
+
+/**
+ * Validates an optional score pair.
+ *
+ * @param {Object} message validated progress message
+ * @returns {boolean}
+ */
+const hasValidScore = message => {
+    const hasScore = Object.prototype.hasOwnProperty.call(message, 'score');
+    const hasScoreMax = Object.prototype.hasOwnProperty.call(message, 'scoremax');
+    if (hasScore !== hasScoreMax) {
+        return false;
+    }
+    return !hasScore || (Number.isFinite(message.score) &&
+        Number.isFinite(message.scoremax) &&
+        message.score >= 0 &&
+        message.scoremax > 0 &&
+        message.score <= message.scoremax);
+};
+
+/**
+ * Creates the form-encoded progress payload.
+ *
+ * @param {Object} message validated progress message
+ * @param {Object} tracking progress endpoint configuration
+ * @returns {string}
+ */
+const createProgressPayload = (message, tracking) => {
+    const values = {
+        cmid: tracking.cmid,
+        sesskey: tracking.sesskey,
+        nonce: tracking.messagenonce,
+        status: message.status === 'completed' ? 'completed' : 'inprogress',
+    };
+    if (Object.prototype.hasOwnProperty.call(message, 'score')) {
+        values.score = message.score;
+        values.scoremax = message.scoremax;
+    }
+    return new URLSearchParams(values).toString();
+};
+
 /**
  * Initialises one isolated InteractEmbed player.
  *
@@ -40,15 +102,7 @@ export const init = (rootId, tracking = {}) => {
     let lastPayload = '';
     const receiveProgress = async event => {
         const message = event.data;
-        if (!iframe || event.source !== iframe.contentWindow || !message || typeof message !== 'object' ||
-                Array.isArray(message)) {
-            return;
-        }
-        const allowedKeys = ['type', 'version', 'nonce', 'status', 'score', 'scoremax'];
-        if (Object.keys(message).some(key => !allowedKeys.includes(key)) ||
-                message.type !== 'interactembed:progress' || message.version !== 1 ||
-                typeof message.nonce !== 'string' || message.nonce !== tracking.messagenonce ||
-                typeof message.status !== 'string') {
+        if (!iframe || event.source !== iframe.contentWindow || !isProgressMessage(message, tracking)) {
             return;
         }
         const originMatches = event.origin === tracking.expectedorigin ||
@@ -56,28 +110,10 @@ export const init = (rootId, tracking = {}) => {
         if (!originMatches || !tracking.endpoint || !tracking.sesskey) {
             return;
         }
-        if (!['inprogress', 'completed'].includes(message.status)) {
+        if (!hasValidScore(message)) {
             return;
         }
-        const hasScore = Object.prototype.hasOwnProperty.call(message, 'score');
-        const hasScoreMax = Object.prototype.hasOwnProperty.call(message, 'scoremax');
-        if (hasScore !== hasScoreMax || (hasScore && (!Number.isFinite(message.score) ||
-                !Number.isFinite(message.scoremax) || message.score < 0 ||
-                message.scoremax <= 0 || message.score > message.scoremax))) {
-            return;
-        }
-        const status = message.status === 'completed' ? 'completed' : 'inprogress';
-        const values = {
-            cmid: tracking.cmid,
-            sesskey: tracking.sesskey,
-            nonce: tracking.messagenonce,
-            status,
-        };
-        if (Number.isFinite(message.score) && Number.isFinite(message.scoremax)) {
-            values.score = message.score;
-            values.scoremax = message.scoremax;
-        }
-        const payload = new URLSearchParams(values).toString();
+        const payload = createProgressPayload(message, tracking);
         if (payload === lastPayload) {
             return;
         }

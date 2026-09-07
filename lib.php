@@ -525,6 +525,8 @@ function interactembed_reset_userdata(stdClass $data): array {
  * @param stdClass $data Activity data containing coursemodule and entrypoint.
  * @param int $draftitemid Draft item id.
  * @param int $oldrevision Previous revision number.
+ * @param string $origin Package origin: upload or library.
+ * @param int $creatorpublicationid InteractEmbed Library publication id.
  * @return array{itemid:int,revision:int}
  */
 function interactembed_import_package(

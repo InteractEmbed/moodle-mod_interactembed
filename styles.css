@@ -21,6 +21,8 @@
     white-space: pre-line;
 }
 
+/* Moodle 4.0's bundled stylelint predates the standard aspect-ratio property. */
+/* stylelint-disable property-no-unknown */
 .mod-interactembed-frame {
     aspect-ratio: var(--mod-interactembed-ratio, 16 / 9);
     background: #000;
@@ -96,6 +98,7 @@
     aspect-ratio: auto;
     height: var(--mod-interactembed-height, 600px);
 }
+/* stylelint-enable property-no-unknown */
 
 .mod-interactembed-iframe {
     border: 0;

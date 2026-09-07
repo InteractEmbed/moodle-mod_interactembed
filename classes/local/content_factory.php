@@ -47,6 +47,7 @@ final class content_factory {
      *
      * @param stdClass $instance Activity record.
      * @param context_module $context Activity context.
+     * @param bool $showembedtools Whether management-only embed tools should be displayed.
      * @return content
      */
     public static function from_instance(stdClass $instance, context_module $context, bool $showembedtools = false): content {
