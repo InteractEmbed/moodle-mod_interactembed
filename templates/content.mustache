@@ -1,0 +1,102 @@
+{{!
+    @template mod_interactembed/content
+
+    Secure responsive player for one InteractEmbed instance.
+
+    Example context (json):
+    {
+        "domid": "interactembed-42",
+        "frameid": "interactembed-42-frame",
+        "iframeurl": "https://example.org/interactive",
+        "externalurl": "https://example.org/interactive",
+        "title": "Interactive example",
+        "description": "Complete the short activity.",
+        "hasdescription": true,
+        "provider": "generic",
+        "expectedorigin": "https://example.org",
+        "sandbox": "allow-scripts allow-forms",
+        "allow": "fullscreen",
+        "lazy": true,
+        "showfullscreen": true,
+        "waitforinteraction": true,
+        "iscard": true,
+        "iscustomheight": false,
+        "customheight": 600,
+        "ratio": "16 / 9",
+        "hascover": false,
+        "coverurl": "",
+        "coveralt": "",
+        "showembedtools": false,
+        "embedcode": "",
+        "embedinputid": "interactembed-42-embedcode"
+    }
+}}
+<div id="{{domid}}"
+     class="mod-interactembed-player{{#iscard}} mod-interactembed-player--card{{/iscard}}"
+     data-provider="{{provider}}"
+     data-expected-origin="{{expectedorigin}}"
+     data-fullscreen-label="{{title}}"
+     style="--mod-interactembed-ratio: {{ratio}};{{#iscustomheight}} --mod-interactembed-height: {{customheight}}px;{{/iscustomheight}}">
+    {{#hasdescription}}
+        <div class="mod-interactembed-description">{{description}}</div>
+    {{/hasdescription}}
+    {{#waitforinteraction}}
+        <div class="mod-interactembed-launch{{#iscustomheight}} mod-interactembed-launch--custom{{/iscustomheight}}{{#hascover}} mod-interactembed-launch--cover{{/hascover}}">
+            {{#hascover}}
+                <img class="mod-interactembed-cover" src="{{coverurl}}" alt="{{coveralt}}">
+            {{/hascover}}
+            <div class="mod-interactembed-launch-content">
+                <strong class="mod-interactembed-launch-title">{{title}}</strong>
+                <p class="small mb-3">{{#str}}loadcontentdesc, mod_interactembed{{/str}}</p>
+                <button type="button"
+                        class="btn btn-primary"
+                        data-action="load-content"
+                        aria-controls="{{frameid}}">
+                    {{#str}}loadcontent, mod_interactembed{{/str}}
+                </button>
+                <a class="btn btn-link" href="{{externalurl}}" target="_blank" rel="noopener noreferrer">
+                    {{#str}}openexternal, mod_interactembed{{/str}}
+                </a>
+            </div>
+        </div>
+    {{/waitforinteraction}}
+    <div id="{{frameid}}"
+         class="mod-interactembed-frame{{#iscustomheight}} mod-interactembed-frame--custom{{/iscustomheight}}"
+         {{#waitforinteraction}}hidden{{/waitforinteraction}}>
+        <iframe class="mod-interactembed-iframe"
+                {{#waitforinteraction}}data-src="{{iframeurl}}"{{/waitforinteraction}}
+                {{^waitforinteraction}}src="{{iframeurl}}"{{/waitforinteraction}}
+                title="{{title}}"
+                sandbox="{{sandbox}}"
+                allow="{{allow}}"
+                referrerpolicy="strict-origin-when-cross-origin"
+                {{#lazy}}loading="lazy"{{/lazy}}
+                allowfullscreen></iframe>
+    </div>
+    <div class="mod-interactembed-actions" {{#waitforinteraction}}hidden{{/waitforinteraction}}>
+        {{#showfullscreen}}
+            <button type="button"
+                    class="btn btn-secondary btn-sm"
+                    data-action="fullscreen"
+                    aria-pressed="false">
+                {{#pix}}e/fullscreen, core{{/pix}}
+                <span data-role="fullscreen-label">{{#str}}fullscreen, mod_interactembed{{/str}}</span>
+            </button>
+        {{/showfullscreen}}
+        <a class="btn btn-link btn-sm" href="{{externalurl}}" target="_blank" rel="noopener noreferrer">
+            {{#str}}openexternal, mod_interactembed{{/str}}
+        </a>
+    </div>
+    {{#showembedtools}}
+        <details class="mod-interactembed-embedtools mt-2">
+            <summary>{{#str}}embedcode, mod_interactembed{{/str}}</summary>
+            <p class="small text-muted mt-2">{{#str}}embedcodedesc, mod_interactembed{{/str}}</p>
+            <label class="sr-only visually-hidden" for="{{embedinputid}}">{{#str}}embedcode, mod_interactembed{{/str}}</label>
+            <textarea id="{{embedinputid}}" class="form-control" rows="4" readonly>{{embedcode}}</textarea>
+            <button type="button" class="btn btn-secondary btn-sm mt-2" data-action="copy-embed">
+                {{#str}}copyembedcode, mod_interactembed{{/str}}
+            </button>
+            <span class="mod-interactembed-copy-status ml-2 ms-2" aria-live="polite"></span>
+        </details>
+    {{/showembedtools}}
+</div>

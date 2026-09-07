@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>InteractEmbed — Microcours</title>
+    <link rel="icon" href="icon.svg?v=2026090101" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=2026090106">
+</head>
+<body>
+    <a class="skip-link" href="#course-main" data-ui="skip">Aller au contenu</a>
+
+    <main id="course-app" class="course-shell" aria-busy="true">
+        <section class="course-player" aria-label="InteractEmbed — Microcours">
+            <header class="course-header">
+                <a class="brand" href="#" data-action="home" aria-label="InteractEmbed">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" role="img">
+                            <path d="M7 12.5A5.5 5.5 0 0 1 12.5 7h19A5.5 5.5 0 0 1 37 12.5v19a5.5 5.5 0 0 1-5.5 5.5h-19A5.5 5.5 0 0 1 7 31.5z"/>
+                            <path class="brand-mark-play" d="m19 16 10 6-10 6z"/>
+                            <circle class="brand-mark-dot" cx="13.5" cy="13.5" r="2"/>
+                        </svg>
+                    </span>
+                    <span class="brand-copy">
+                        <strong>InteractEmbed</strong>
+                        <small data-ui="courseType">Microcours interactif</small>
+                    </span>
+                </a>
+
+                <div class="header-tools">
+                    <div class="lesson-count" aria-live="polite">
+                        <span data-ui="lessonLabel">Étape</span>
+                        <strong><span data-ui="current">1</span>/<span data-ui="total">17</span></strong>
+                    </div>
+                    <label class="language-picker">
+                        <span class="sr-only" data-ui="languageLabel">Langue</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 6h-3.03a15.7 15.7 0 0 0-1.36-3.18A8.03 8.03 0 0 1 18.92 8ZM12 4c.83 1.01 1.5 2.36 1.85 4h-3.7C10.5 6.36 11.17 5.01 12 4ZM9.47 4.82A15.7 15.7 0 0 0 8.11 8H5.08a8.03 8.03 0 0 1 4.39-3.18ZM4.26 10h3.56a16.5 16.5 0 0 0 0 4H4.26a8.13 8.13 0 0 1 0-4Zm.82 6h3.03c.31 1.17.77 2.24 1.36 3.18A8.03 8.03 0 0 1 5.08 16ZM12 20c-.83-1.01-1.5-2.36-1.85-4h3.7c-.35 1.64-1.02 2.99-1.85 4Zm2.22-6H9.78a14.28 14.28 0 0 1 0-4h4.44a14.28 14.28 0 0 1 0 4Zm.31 5.18A15.7 15.7 0 0 0 15.89 16h3.03a8.03 8.03 0 0 1-4.39 3.18ZM16.18 14a16.5 16.5 0 0 0 0-4h3.56a8.13 8.13 0 0 1 0 4z"/></svg>
+                        <select id="language-select" data-action="language">
+                            <option value="fr">Français</option>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                        </select>
+                    </label>
+                </div>
+            </header>
+
+            <div class="progress-track" aria-hidden="true">
+                <span data-ui="progress"></span>
+            </div>
+
+            <section id="course-main" class="slide-viewport" tabindex="-1">
+                <article id="slide" class="slide" aria-live="polite"></article>
+            </section>
+
+            <footer class="course-footer">
+                <button class="nav-button nav-button--secondary" type="button" data-action="previous">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15.5 5-7 7 7 7 1.5-1.5-5.5-5.5L17 6.5z"/></svg>
+                    <span data-ui="previous">Précédent</span>
+                </button>
+
+                <div class="dot-navigation" data-ui="dots" role="navigation" aria-label="Navigation du cours"></div>
+
+                <button class="nav-button nav-button--primary" type="button" data-action="next">
+                    <span data-ui="next">Continuer</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8.5 5 7 7-7 7L7 17.5l5.5-5.5L7 6.5z"/></svg>
+                </button>
+            </footer>
+        </section>
+    </main>
+
+    <noscript>Ce microcours nécessite JavaScript. · This microcourse requires JavaScript. · Este microcurso necesita JavaScript.</noscript>
+    <script src="course-data.js?v=2026090106"></script>
+    <script src="app.js?v=2026090106"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+/*
+ * This file is part of Moodle - https://moodle.org/
+ *
+ * Moodle is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * @package   mod_interactembed
+ * @copyright 2026 Michel Cardinal
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+.mod-interactembed-player {
+    max-width: 100%;
+}
+
+.mod-interactembed-description {
+    line-height: 1.5;
+    margin-bottom: .75rem;
+    white-space: pre-line;
+}
+
+.mod-interactembed-frame {
+    aspect-ratio: var(--mod-interactembed-ratio, 16 / 9);
+    background: #000;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.mod-interactembed-launch {
+    align-items: center;
+    aspect-ratio: var(--mod-interactembed-ratio, 16 / 9);
+    background: color-mix(in srgb, var(--bs-primary, #0f6cbf) 8%, var(--bs-body-bg, #fff));
+    border: 1px solid color-mix(in srgb, var(--bs-primary, #0f6cbf) 28%, transparent);
+    border-radius: .5rem;
+    display: flex;
+    justify-content: center;
+    min-height: 12rem;
+    padding: 1.5rem;
+    text-align: center;
+    width: 100%;
+}
+
+.mod-interactembed-launch--custom {
+    aspect-ratio: auto;
+    min-height: min(var(--mod-interactembed-height, 600px), 20rem);
+}
+
+.mod-interactembed-launch-content {
+    max-width: 34rem;
+    position: relative;
+    z-index: 2;
+}
+
+.mod-interactembed-launch--cover {
+    background: #172236;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.mod-interactembed-launch--cover::after {
+    background: linear-gradient(135deg, rgba(13, 25, 48, .88), rgba(13, 25, 48, .58));
+    content: "";
+    inset: 0;
+    position: absolute;
+    z-index: 1;
+}
+
+.mod-interactembed-cover {
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
+    position: absolute;
+    width: 100%;
+}
+
+.mod-interactembed-launch--cover .btn-link {
+    color: #fff;
+}
+
+.mod-interactembed-launch-title {
+    display: block;
+    font-size: 1.125rem;
+    margin-bottom: .5rem;
+}
+
+.mod-interactembed-player--card .mod-interactembed-launch {
+    aspect-ratio: auto;
+    min-height: 10rem;
+}
+
+.mod-interactembed-frame--custom {
+    aspect-ratio: auto;
+    height: var(--mod-interactembed-height, 600px);
+}
+
+.mod-interactembed-iframe {
+    border: 0;
+    height: 100%;
+    inset: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.mod-interactembed-actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    margin-top: .5rem;
+}
+
+.mod-interactembed-actions .fa {
+    margin-inline-end: .25rem;
+}
+
+.mod-interactembed-embedtools textarea {
+    font-family: var(--font-monospace, monospace);
+    font-size: .8rem;
+}
+
+.mod-interactembed-player:fullscreen,
+.mod-interactembed-player--fullscreen-fallback {
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+}
+
+.mod-interactembed-player--fullscreen-fallback {
+    inset: 0;
+    position: fixed;
+    z-index: 1055;
+}
+
+.mod-interactembed-body-locked {
+    overflow: hidden;
+}
+
+.mod-interactembed-player:fullscreen .mod-interactembed-frame,
+.mod-interactembed-player--fullscreen-fallback .mod-interactembed-frame {
+    flex: 1 1 auto;
+    height: auto;
+}
+
+.mod-interactembed-player:fullscreen .mod-interactembed-actions,
+.mod-interactembed-player--fullscreen-fallback .mod-interactembed-actions {
+    background: #fff;
+    margin: 0;
+    padding: .5rem;
+}
