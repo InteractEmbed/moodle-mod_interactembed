@@ -17,7 +17,7 @@
 namespace mod_interactembed;
 
 /**
- * Tests language pack parity.
+ * Tests the Marketplace language-pack layout.
  *
  * @package   mod_interactembed
  * @copyright 2026 Michel Cardinal
@@ -26,25 +26,16 @@ namespace mod_interactembed;
  */
 final class language_test extends \advanced_testcase {
     /**
-     * Ensures that bundled translations define the same keys.
+     * Ensures that the distributable plugin contains only English source strings.
      */
-    public function test_bundled_language_keys_match(): void {
-        $english = $this->load_language_keys('en');
-        $this->assertSame($english, $this->load_language_keys('fr'));
-        $this->assertSame($english, $this->load_language_keys('es'));
-    }
+    public function test_distribution_contains_only_english_source_strings(): void {
+        $languages = array_map('basename', glob(__DIR__ . '/../lang/*', GLOB_ONLYDIR));
+        sort($languages);
+        $this->assertSame(['en'], $languages);
 
-    /**
-     * Loads and sorts language keys from one bundled language file.
-     *
-     * @param string $language Language code.
-     * @return array
-     */
-    private function load_language_keys(string $language): array {
         $string = [];
-        require(__DIR__ . '/../lang/' . $language . '/interactembed.php');
-        $keys = array_keys($string);
-        sort($keys);
-        return $keys;
+        require(__DIR__ . '/../lang/en/interactembed.php');
+        $this->assertNotEmpty($string);
+        $this->assertArrayHasKey('pluginname', $string);
     }
 }

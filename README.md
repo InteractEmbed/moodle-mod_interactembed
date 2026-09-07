@@ -16,12 +16,18 @@ Development release 0.3 supports:
 - atomic package revisions;
 - a sandboxed responsive player;
 - short-lived signed package URLs independent of Moodle session cookies;
-- English, French and Spanish interfaces;
+- English source strings in the distributable plugin, with complete French and
+  Spanish interface translations prepared for Moodle AMOS language packs;
 - standard Moodle visibility, availability and view-completion controls.
 
 Development release 0.4 also includes the optional, local and trilingual
 InteractEmbed guide as a content source. It doubles as a user guide and a
 working HTML5 activity model, without making external connections.
+
+The guide itself remains fully trilingual and initially follows the active
+Moodle language. Marketplace plugin archives contain only `lang/en`; the
+complete French and Spanish interface translations are preserved separately in
+the release workspace for submission to AMOS after plugin approval.
 
 Development release 0.5 adds safe web-address and iframe sources, including
 smart conversion for YouTube, Google Workspace, Canva, Genially, Padlet and

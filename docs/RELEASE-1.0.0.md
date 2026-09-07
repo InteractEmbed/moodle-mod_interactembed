@@ -24,6 +24,13 @@ progress, group-aware reports, Privacy API, course reset, events, backup and
 restore, and site administration settings. It sends no automatic email or
 Moodle notification.
 
+The Marketplace archive contains Moodle's English source strings only. The
+complete French and international Spanish interface translations are retained
+outside the plugin archive as AMOS submission packages. The self-contained
+interactive guide remains natively trilingual and selects English, French or
+Spanish from the active Moodle language while retaining its own language
+selector.
+
 The pre-1.0 functional recipe passed 47 assertions on Moodle 5.2 and
 IOMAD/Moodle 4.5. The coordinated general course backup/restore recipe passed
 11 assertions on each site. After deleting both source and restored courses,

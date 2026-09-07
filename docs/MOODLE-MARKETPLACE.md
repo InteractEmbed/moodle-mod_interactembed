@@ -20,6 +20,10 @@ Moodle Marketplace submission.
 - Suggested tags: HTML5, interactive content, embed, iframe, completion,
   grading, accessibility, multilingual
 
+The Marketplace ZIP contains only Moodle's English source strings. Complete
+French and international Spanish translations are supplied separately for AMOS
+after approval. The included interactive guide remains natively trilingual.
+
 ## English
 
 ### Short description

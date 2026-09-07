@@ -9,8 +9,9 @@
   embeds, the local trilingual guide, cover and responsive presentation modes,
   accessible full screen, package sandboxing and signed resource delivery.
 - Provides standard Moodle grading, explicit completion, learner progress,
-  group-aware reports, course reset, events, Privacy API, backup/restore,
-  administration settings and English, French and Spanish interfaces.
+  group-aware reports, course reset, events, Privacy API, backup/restore and
+  administration settings. English source strings ship in the plugin; complete
+  French and Spanish translations are prepared separately for Moodle AMOS.
 - Keeps the companion Block and Creator optional. Creator publications are
   validated and copied into independent activity-owned snapshots when the
   compatible Creator Consumer API v1 is available.

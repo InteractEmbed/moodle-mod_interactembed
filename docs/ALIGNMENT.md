@@ -37,7 +37,7 @@ explicitly documented exception in the other plugin.
 | Course reset | Not applicable | Deletes learner progress and resets grades |
 | Trusted package | Site configuration authority | Dedicated module capability |
 | Default source | URL-first in the block | File Manager/package first, by product decision |
-| Bundled languages | English package, FR/ES through AMOS publication workflow | EN/FR/ES bundled, as required for the activity candidate |
+| Language packs | English source strings in the package; FR/ES through AMOS | English source strings in the package; FR/ES through AMOS |
 
 ## Progress protocol unique to the activity
 
