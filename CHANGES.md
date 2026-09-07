@@ -1,5 +1,21 @@
 # Change log
 
+## 1.0.0
+
+- Declares the first stable release after the complete Moodle Plugin CI matrix,
+  Moodle 5.2 and IOMAD/Moodle 4.5 functional recipes, and coordinated
+  Activity/Creator backup, restore and deletion lifecycle validation passed.
+- Provides File Manager ZIP and unpacked-project sources, privacy-aware remote
+  embeds, the local trilingual guide, cover and responsive presentation modes,
+  accessible full screen, package sandboxing and signed resource delivery.
+- Provides standard Moodle grading, explicit completion, learner progress,
+  group-aware reports, course reset, events, Privacy API, backup/restore,
+  administration settings and English, French and Spanish interfaces.
+- Keeps the companion Block and Creator optional. Creator publications are
+  validated and copied into independent activity-owned snapshots when the
+  compatible Creator Consumer API v1 is available.
+- Sends no automatic email or Moodle notification.
+
 ## 0.9.0 beta10
 
 - Passes the complete Moodle Plugin CI matrix from Moodle 4.0/PHP 7.4 through

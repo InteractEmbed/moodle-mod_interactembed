@@ -217,5 +217,10 @@ function xmldb_interactembed_upgrade(int $oldversion): bool {
         upgrade_mod_savepoint(true, 2026090700, 'interactembed');
     }
 
+    if ($oldversion < 2026090701) {
+        // Marks the validated 1.0 stable release without database schema changes.
+        upgrade_mod_savepoint(true, 2026090701, 'interactembed');
+    }
+
     return true;
 }

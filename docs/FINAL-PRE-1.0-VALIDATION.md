@@ -2,6 +2,9 @@
 
 Date: 2026-09-07
 
+> Historical release-gate record. The subsequent stable release is documented
+> in `RELEASE-1.0.0.md`.
+
 ## Candidate
 
 - Component: `mod_interactembed`

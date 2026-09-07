@@ -3,6 +3,12 @@
 InteractEmbed is a Moodle activity for validated, sandboxed HTML5 packages and
 privacy-aware external embeds.
 
+Stable release 1.0 combines the validated feature set described below. It can
+be installed and used independently: neither the companion InteractEmbed Block
+nor InteractEmbed Creator is required. When a compatible Creator Consumer API
+v1 is available, teachers may additionally copy an immutable publication from
+the course, category or site library into an activity-owned snapshot.
+
 Development release 0.3 supports:
 
 - one ZIP archive or an unpacked project selected with Moodle File Manager;
