@@ -8,7 +8,7 @@ Date: 2026-09-07
 - Release: `0.9.0-beta10`
 - Version: `2026090700`
 - Candidate version commit: `8728dee`
-- Last fully published and green commit: `dbb9225`
+- Last fully published and green commit: `c182833`
 - Moodle support declaration: 4.0 through 5.2
 - Maturity remains `MATURITY_BETA`; no 1.0 tag or stable release was created.
 
@@ -31,8 +31,9 @@ The same CLI recipe was executed without browser automation on:
 - IOMAD/Moodle 4.5.13 (Build 20260810), upgrade from beta9 to beta10.
 
 Both sites recorded plugin version `2026090700`. All temporary courses, users,
-activities, files, grades, Creator projects and publications were removed and
-their absence was verified after each successful recipe.
+activities, files and grades were removed after each successful recipe. A
+targeted post-recipe audit found and removed six orphaned Creator test projects;
+the underlying Creator lifecycle defect is recorded below.
 
 ## Functional recipe results
 
@@ -81,7 +82,7 @@ and signed embed resizing bounds.
 
 ## Moodle Plugin CI
 
-The public run for `dbb9225` passed all eight jobs:
+The latest public run for `c182833` passed all eight jobs:
 
 - Moodle 4.0 / PHP 7.4 / MariaDB;
 - Moodle 4.1 / PHP 8.0 / MariaDB;
@@ -111,13 +112,24 @@ now passes the context id as a supported SQL parameter. Its coordinated Moodle
 11 assertions; the complete Creator suite passed 13 tests and 93 assertions,
 and its six-job public CI matrix is green.
 
+A subsequent lifecycle audit exposed a distinct Creator issue: deleting the
+source and restored courses leaves the corresponding Creator project, revision
+and publication records behind after their course contexts are removed. Six
+temporary projects named `Portable Activity source` were found across the two
+test sites and removed with a narrowly scoped cleanup. The Creator currently
+has privacy-provider cleanup, but no course/context deletion observer. This is
+not an Activity data leak or Activity cleanup defect, but it is a suite-level
+data-lifecycle blocker that must be fixed and regression-tested in the Creator
+before a coordinated 1.0 release.
+
 ## Readiness assessment
 
-The Activity itself is ready for a coordinated 1.0 release decision: its
+The Activity itself is ready as a pre-1.0 functional candidate: its
 supported matrix, install/upgrade path, package security, roles, progress,
 grades, completion, reports, multilingual UI, autonomous ZIP path,
 backup/restore and Creator consumer integration all pass.
 
-The cross-plugin backup blocker is therefore lifted. Final stable maturity and
-the `v1.0.0` tag remain a separate coordinated release decision; neither is
+The earlier cross-plugin backup blocker is lifted. The coordinated suite is
+nevertheless **NOT READY** for 1.0 until the Creator orphan cleanup defect is
+resolved. Stable maturity and the `v1.0.0` tag remain deferred; neither is
 created by this validation.
