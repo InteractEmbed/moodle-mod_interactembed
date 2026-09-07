@@ -31,9 +31,11 @@ The same CLI recipe was executed without browser automation on:
 - IOMAD/Moodle 4.5.13 (Build 20260810), upgrade from beta9 to beta10.
 
 Both sites recorded plugin version `2026090700`. All temporary courses, users,
-activities, files and grades were removed after each successful recipe. A
-targeted post-recipe audit found and removed six orphaned Creator test projects;
-the underlying Creator lifecycle defect is recorded below.
+activities, files and grades were removed after each successful recipe. The
+original post-recipe audit found six orphaned Creator test projects and removed
+them. After the Creator rc17 correction, the complete backup/restore/deletion
+recipe was repeated on both sites and the same audit found zero orphaned
+projects and removed nothing.
 
 ## Functional recipe results
 
@@ -113,23 +115,30 @@ now passes the context id as a supported SQL parameter. Its coordinated Moodle
 and its six-job public CI matrix is green.
 
 A subsequent lifecycle audit exposed a distinct Creator issue: deleting the
-source and restored courses leaves the corresponding Creator project, revision
-and publication records behind after their course contexts are removed. Six
+source and restored courses left the corresponding Creator project, revision
+and publication records behind after their course contexts were removed. Six
 temporary projects named `Portable Activity source` were found across the two
-test sites and removed with a narrowly scoped cleanup. The Creator currently
-has privacy-provider cleanup, but no course/context deletion observer. This is
-not an Activity data leak or Activity cleanup defect, but it is a suite-level
-data-lifecycle blocker that must be fixed and regression-tested in the Creator
-before a coordinated 1.0 release.
+test sites and removed with a narrowly scoped cleanup.
+
+This finding is resolved on Creator `0.9.0-rc17`, commit `5dcab57`. The Creator
+now registers native Moodle observers for course and course-category deletion,
+removes the complete project graph and Files API areas, and reuses that cleanup
+service for privacy erasure. Its Moodle 5.2 suite passes 15 tests and 100
+assertions, and its public six-job CI run `34142247632` is green.
+
+The Activity's original full-course scenario was then repeated on Moodle 5.2
+and IOMAD/Moodle 4.5. All 11 backup/restore assertions passed on each site.
+Deleting both source and restored courses left zero matching projects; the
+targeted cleanup audit deleted zero records on both sites. The lifecycle
+blocker is therefore confirmed resolved in the real cross-plugin scenario.
 
 ## Readiness assessment
 
-The Activity itself is ready as a pre-1.0 functional candidate: its
+The Activity is **READY** as a pre-1.0 functional candidate: its
 supported matrix, install/upgrade path, package security, roles, progress,
 grades, completion, reports, multilingual UI, autonomous ZIP path,
 backup/restore and Creator consumer integration all pass.
 
-The earlier cross-plugin backup blocker is lifted. The coordinated suite is
-nevertheless **NOT READY** for 1.0 until the Creator orphan cleanup defect is
-resolved. Stable maturity and the `v1.0.0` tag remain deferred; neither is
-created by this validation.
+Both cross-plugin blockers are lifted. The coordinated Activity/Creator path is
+**READY** for the human 1.0 release decision. Stable maturity and the `v1.0.0`
+tag remain deliberately deferred; neither is created by this validation.
