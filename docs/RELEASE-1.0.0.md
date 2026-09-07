@@ -37,9 +37,11 @@ IOMAD/Moodle 4.5. The coordinated general course backup/restore recipe passed
 the Creator rc17 lifecycle audit found zero orphaned projects on both sites.
 
 The public Activity CI baseline passed eight combinations from Moodle 4.0 with
-PHP 7.4 through Moodle 5.2 with PHP 8.4, using MariaDB and PostgreSQL. Creator
-rc17 commit `5dcab57` also passed its six-job public matrix and its Moodle 5.2
-suite of 15 tests and 100 assertions.
+PHP 7.4 through Moodle 5.2 with PHP 8.4, using MariaDB and PostgreSQL. The
+optional companion Block 1.0.0 commit `f404516` passed its public CI matrix.
+The optional Creator 1.0.0 commit `bd0522b` also passed its six-job public
+matrix; its lifecycle release candidate had passed the Moodle 5.2 suite of 15
+tests and 100 assertions before the stable metadata release.
 
 ## Security and privacy
 
