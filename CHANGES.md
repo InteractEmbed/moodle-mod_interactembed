@@ -1,5 +1,17 @@
 # Change log
 
+## 0.9.0 beta10
+
+- Passes the complete Moodle Plugin CI matrix from Moodle 4.0/PHP 7.4 through
+  Moodle 5.2/PHP 8.4 on MariaDB and PostgreSQL.
+- Keeps the progress-message security contract while decomposing its client-side
+  validation to satisfy Moodle's JavaScript complexity limit.
+- Makes full-screen template tests independent of Moodle-version-specific icon
+  markup and documents the standards-compliant responsive CSS exception needed
+  by Moodle 4.0's older Stylelint rules.
+- Completes PHPDoc coverage and PHPUnit coverage declarations and normalises the
+  three bundled language packs for Moodle tooling.
+
 ## 0.9.0 beta9
 
 - Lets opaque-origin package frames fetch their own JSON and other signed resources
