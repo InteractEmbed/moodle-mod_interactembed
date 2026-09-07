@@ -29,6 +29,9 @@ use mod_interactembed\local\package\package_hash;
 
 /**
  * Tests draft-package validation.
+ *
+ * @covers \mod_interactembed\local\package\package_importer
+ * @covers \mod_interactembed\local\package\package_hash
  */
 final class package_importer_test extends \advanced_testcase {
     public function test_non_html_entrypoint_is_rejected(): void {

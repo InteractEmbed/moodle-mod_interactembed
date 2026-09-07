@@ -24,6 +24,7 @@ use mod_interactembed\local\site_policy;
  * @package   mod_interactembed
  * @copyright 2026 Michel Cardinal
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \mod_interactembed\local\site_policy
  */
 final class site_policy_test extends \advanced_testcase {
     /**

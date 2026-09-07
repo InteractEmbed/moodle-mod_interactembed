@@ -24,6 +24,7 @@ use mod_interactembed\local\embed\embed_builder;
  * @package   mod_interactembed
  * @copyright 2026 Michel Cardinal
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \mod_interactembed\local\embed\embed_builder
  */
 final class embed_builder_test extends \basic_testcase {
     /**

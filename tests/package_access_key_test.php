@@ -24,6 +24,7 @@ use mod_interactembed\local\package\package_access_key;
  * @package   mod_interactembed
  * @copyright 2026 Michel Cardinal
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \mod_interactembed\local\package\package_access_key
  */
 final class package_access_key_test extends \advanced_testcase {
     /**

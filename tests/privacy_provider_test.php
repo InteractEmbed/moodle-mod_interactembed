@@ -31,6 +31,8 @@ use mod_interactembed\privacy\provider;
 
 /**
  * Tests privacy metadata for stored progress and external iframe connections.
+ *
+ * @covers \mod_interactembed\privacy\provider
  */
 final class privacy_provider_test extends \basic_testcase {
     public function test_all_personal_data_flows_are_declared(): void {

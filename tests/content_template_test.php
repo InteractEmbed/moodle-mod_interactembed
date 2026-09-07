@@ -22,6 +22,7 @@ namespace mod_interactembed;
  * @package   mod_interactembed
  * @copyright 2026 Michel Cardinal
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @coversNothing
  */
 final class content_template_test extends \advanced_testcase {
     /**

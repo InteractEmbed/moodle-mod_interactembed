@@ -25,6 +25,8 @@ use mod_interactembed\local\sandbox_policy;
  * @package   mod_interactembed
  * @copyright 2026 Michel Cardinal
  * @license   https://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers    \mod_interactembed\local\package\package_response_policy
+ * @covers    \mod_interactembed\local\sandbox_policy
  */
 final class package_response_policy_test extends \basic_testcase {
     /**

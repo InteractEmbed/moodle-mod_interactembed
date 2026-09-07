@@ -28,6 +28,8 @@ use mod_interactembed\local\package\archive_validator;
 
 /**
  * Tests ZIP archive security validation in the activity component.
+ *
+ * @covers \mod_interactembed\local\package\archive_validator
  */
 final class archive_validator_test extends \advanced_testcase {
     public function test_safe_archive_is_accepted(): void {

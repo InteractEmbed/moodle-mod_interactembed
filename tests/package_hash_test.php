@@ -28,6 +28,8 @@ use mod_interactembed\local\package\package_hash;
 
 /**
  * Tests the local implementation of the Creator canonical hash.
+ *
+ * @covers \mod_interactembed\local\package\package_hash
  */
 final class package_hash_test extends \advanced_testcase {
     public function test_hash_is_path_sorted_and_detects_tampering(): void {

@@ -28,6 +28,8 @@ use mod_interactembed\local\progress_nonce;
 
 /**
  * Tests per-display progress nonce scope.
+ *
+ * @covers \mod_interactembed\local\progress_nonce
  */
 final class progress_nonce_test extends \advanced_testcase {
     public function test_nonce_is_bound_to_its_course_module(): void {
