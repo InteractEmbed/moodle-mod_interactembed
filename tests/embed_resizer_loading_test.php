@@ -40,7 +40,7 @@ final class embed_resizer_loading_test extends \advanced_testcase {
             hook_callbacks::before_footer($hook);
             $this->assertSame('', $hook->get_output());
         } else {
-            $this->assertSame('', interactembed_before_footer());
+            $this->assertSame('', mod_interactembed_before_footer());
         }
         $html = $PAGE->requires->get_end_code();
         $this->assertStringContainsString('mod_interactembed/embed_resizer', $html);
