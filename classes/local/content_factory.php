@@ -256,8 +256,6 @@ final class content_factory {
             'data-interactembed-id' => (string) $cmid,
             'style' => 'border:0;display:block;width:100%;',
         ]);
-        return $code . html_writer::script('', new moodle_url('/mod/interactembed/embed-resizer.js', [
-            'v' => 2026090101,
-        ]));
+        return $code;
     }
 }

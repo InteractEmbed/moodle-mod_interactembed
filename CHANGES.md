@@ -1,5 +1,16 @@
 # Change log
 
+## 1.0.1 — 2026-10-12
+
+- Addresses Marketplace MMR-214 issues #1 to #3: existing learner progress
+  now uses the registered record_progress External Service and core/ajax;
+  the copied-iframe resizer uses AMD and destination-page output hooks;
+  the player template licence and context contract are documented.
+- Preserves the existing message protocol, capability, session-bound nonce,
+  grade and completion rules. The internal progress.php endpoint is removed.
+- Keeps a compatibility branch for Moodle 4.0/4.1 external API classes.
+  New snippets contain only the iframe; old resizer URLs remain inert assets.
+
 ## 1.0.0
 
 - Declares the first stable release after the complete Moodle Plugin CI matrix,

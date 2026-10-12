@@ -565,3 +565,16 @@ function interactembed_import_package(
     }
     return ['itemid' => $itemid, 'revision' => $revision];
 }
+
+/**
+ * Loads the iframe resizer on destination pages on Moodle 4.0 to 4.3.
+ *
+ * Moodle 4.4 and later use the equivalent output hook in db/hooks.php.
+ *
+ * @return string Empty footer markup.
+ */
+function mod_interactembed_before_footer(): string {
+    global $PAGE;
+    $PAGE->requires->js_call_amd('mod_interactembed/embed_resizer', 'init');
+    return '';
+}

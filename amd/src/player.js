@@ -22,6 +22,7 @@
  */
 
 import {get_string as getString} from 'core/str';
+import {call as ajaxCall} from 'core/ajax';
 
 const progressKeys = ['type', 'version', 'nonce', 'status', 'score', 'scoremax'];
 
@@ -65,16 +66,15 @@ const hasValidScore = message => {
 };
 
 /**
- * Creates the form-encoded progress payload.
+ * Creates the external service arguments.
  *
  * @param {Object} message validated progress message
  * @param {Object} tracking progress endpoint configuration
- * @returns {string}
+ * @returns {Object}
  */
 const createProgressPayload = (message, tracking) => {
     const values = {
         cmid: tracking.cmid,
-        sesskey: tracking.sesskey,
         nonce: tracking.messagenonce,
         status: message.status === 'completed' ? 'completed' : 'inprogress',
     };
@@ -82,7 +82,7 @@ const createProgressPayload = (message, tracking) => {
         values.score = message.score;
         values.scoremax = message.scoremax;
     }
-    return new URLSearchParams(values).toString();
+    return values;
 };
 
 /**
@@ -107,27 +107,23 @@ export const init = (rootId, tracking = {}) => {
         }
         const originMatches = event.origin === tracking.expectedorigin ||
             (tracking.allowopaqueorigin && event.origin === 'null');
-        if (!originMatches || !tracking.endpoint || !tracking.sesskey) {
+        if (!originMatches || !tracking.cmid) {
             return;
         }
         if (!hasValidScore(message)) {
             return;
         }
         const payload = createProgressPayload(message, tracking);
-        if (payload === lastPayload) {
+        const payloadKey = JSON.stringify(payload);
+        if (payloadKey === lastPayload) {
             return;
         }
-        lastPayload = payload;
+        lastPayload = payloadKey;
         try {
-            const response = await fetch(tracking.endpoint, {
-                method: 'POST',
-                credentials: 'same-origin',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'},
-                body: payload,
-            });
-            if (!response.ok) {
-                lastPayload = '';
-            }
+            await ajaxCall([{
+                methodname: 'mod_interactembed_record_progress',
+                args: payload,
+            }])[0];
         } catch (error) {
             lastPayload = '';
         }

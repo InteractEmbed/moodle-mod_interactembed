@@ -54,8 +54,6 @@ $player = \mod_interactembed\local\content_factory::from_instance($instance, $co
 $messagenonce = \mod_interactembed\local\progress_nonce::issue((int) $cm->id);
 $PAGE->requires->js_call_amd('mod_interactembed/player', 'init', [$player->get_dom_id(), [
     'cmid' => (int) $cm->id,
-    'sesskey' => sesskey(),
-    'endpoint' => (new moodle_url('/mod/interactembed/progress.php'))->out(false),
     'expectedorigin' => $player->get_expected_origin(),
     'allowopaqueorigin' => in_array($instance->sourcetype, ['package', 'guide'], true),
     'messagenonce' => $messagenonce,
