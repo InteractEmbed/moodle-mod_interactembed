@@ -26,7 +26,7 @@ namespace mod_interactembed;
  */
 final class embed_resizer_loading_test extends \advanced_testcase {
     /**
-     * Verifies the output hook requests the compiled AMD module.
+     * Verifies the supported output callback requests the compiled AMD module.
      */
     public function test_destination_page_loads_resizer(): void {
         global $CFG, $PAGE;
@@ -34,11 +34,15 @@ final class embed_resizer_loading_test extends \advanced_testcase {
         require_once($CFG->dirroot . '/mod/interactembed/lib.php');
         $PAGE->set_context(\context_system::instance());
         $PAGE->set_url('/my/index.php');
-        $renderer = $PAGE->get_renderer('core');
-        $hook = new \core\hook\output\before_footer_html_generation($renderer);
-        hook_callbacks::before_footer($hook);
+        if (class_exists(\core\hook\output\before_footer_html_generation::class)) {
+            $renderer = $PAGE->get_renderer('core');
+            $hook = new \core\hook\output\before_footer_html_generation($renderer);
+            hook_callbacks::before_footer($hook);
+            $this->assertSame('', $hook->get_output());
+        } else {
+            $this->assertSame('', interactembed_before_footer());
+        }
         $html = $PAGE->requires->get_end_code();
         $this->assertStringContainsString('mod_interactembed/embed_resizer', $html);
-        $this->assertSame('', $hook->get_output());
     }
 }
